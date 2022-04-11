@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}All {{ object.id }}{% endblock %}
+{% block content %}
+<h2>Question num: {{ object.id }}</h2>
+<h5>Published on: {{ object.pub_date}}</h5>
+<p><a href="{% url 'polls:question_update' question.id %}">Modifica</a></p>
+<p>{{ object.q_text }}</p>
+<!--{{ object.choices.all }}-->
+{% if object.choices.all %}
+<ul>
+    {% for choice in object.choices.all %}
+    <li>
+        {{ choice.choice_text}} ({{ choice.votes }})
+    <form action="{% url 'polls:vote' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="choice" value="{{choice.id}}"/>
+        <input type="submit" value="Vote!"/>
+    </form>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No choices available!</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}All Polls{% endblock %}
+{% block content %}
+<h2>All Questions</h2>
+<table>
+    <thead>
+        <tr>
+            <td>Published Date and Time</td>
+            <td>Question Text</td>
+        </tr>
+    </thead>
+    <tbody>
+    {% for question in object_list %}
+    <tr>
+        <td>{{ question.pub_date }}</td>
+        <td><a href="{% url 'polls:question_detail' pk=question.id %}">{{ question.q_text }}</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<p><a href="{% url 'polls:question_create' %}">Create new question</a></p>
+{% endblock %}

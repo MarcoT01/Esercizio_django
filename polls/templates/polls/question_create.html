@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}New Question{% endblock %}
+{% block content %}
+<form method="post"> {% csrf_token %}
+    <ul>
+        <li>{{ form_q.text }}</li>
+        <li>{{ form.as_ul }}</li>
+    </ul>
+
+    <input type="submit" value="Create"/>
+</form>
+
+{% endblock %}
